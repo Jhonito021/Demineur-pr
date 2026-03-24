@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+  <title>Démineur Prédictif - Sélection après IA</title>
+  <!-- Font Awesome 6 -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- En-tête -->
+    <div class="header">
+      <div class="logo">
+        <i class="fas fa-brain"></i>
+        <h1>MINES PREDICTOR</h1>
+        <i class="fas fa-chart-line"></i>
+      </div>
+      <p class="subtitle">IA prédit la case la plus sûre • Cliquez sur les cases pour confirmer</p>
+    </div>
+
+    <!-- Statistiques -->
+    <div class="stats">
+      <div class="stat-card">
+        <i class="fas fa-bomb"></i>
+        <span class="stat-label">Mines</span>
+        <span class="stat-value" id="minesCount">3</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-check-circle"></i>
+        <span class="stat-label">Cases sûres</span>
+        <span class="stat-value" id="safeCellsLeft">22</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-flag-checkered"></i>
+        <span class="stat-label">Découvertes</span>
+        <span class="stat-value" id="revealedCount">0</span>
+      </div>
+      <div class="stat-card">
+        <i class="fas fa-chart-simple"></i>
+        <span class="stat-label">Précision</span>
+        <span class="stat-value" id="accuracyRate">100%</span>
+      </div>
+    </div>
+
+    <!-- Contrôle mines et actions -->
+    <div class="controls">
+      <div class="mines-control">
+        <label><i class="fas fa-sliders-h"></i> Mines :</label>
+        <div class="mines-selector">
+          <button id="decreaseMines" class="control-btn"><i class="fas fa-minus"></i></button>
+          <span id="minesValue">3</span>
+          <button id="increaseMines" class="control-btn"><i class="fas fa-plus"></i></button>
+        </div>
+      </div>
+      <div class="action-controls">
+        <button id="predictBtn" class="predict-btn"><i class="fas fa-magic"></i> IA Prédire</button>
+        <button id="resetGameBtn" class="reset-btn"><i class="fas fa-sync-alt"></i> Nouvelle partie</button>
+      </div>
+    </div>
+
+    <!-- Grille 5x5 -->
+    <div class="grid-wrapper">
+      <div class="mines-grid" id="minesGrid"></div>
+    </div>
+
+    <!-- Panel de prédiction IA -->
+    <div class="prediction-panel" id="predictionPanel">
+      <div class="ai-header">
+        <i class="fas fa-microchip"></i>
+        <span>ANALYSE IA EN TEMPS RÉEL</span>
+        <i class="fas fa-robot"></i>
+      </div>
+      
+      <div class="prediction-result" id="predictionResult">
+        <div class="prediction-icon">
+          <i class="fas fa-shield-alt"></i>
+        </div>
+        <div class="prediction-text">
+          <span class="prediction-label">🎯 CASE RECOMMANDÉE PAR L'IA</span>
+          <span class="prediction-coord" id="predictedCoord">--</span>
+        </div>
+        <div class="confidence-badge" id="confidenceBadge">
+          <i class="fas fa-chart-line"></i>
+          <span id="confidenceValue">0%</span>
+        </div>
+      </div>
+
+      <!-- Barre de confiance -->
+      <div class="confidence-container">
+        <div class="confidence-bar">
+          <div class="confidence-fill" id="confidenceFill"></div>
+        </div>
+        <div class="confidence-stats">
+          <span><i class="fas fa-chart-pie"></i> Score sécurité</span>
+          <span id="securityScore">0%</span>
+        </div>
+      </div>
+
+      <!-- Détails analyse -->
+      <div class="analysis-grid">
+        <div class="analysis-item">
+          <i class="fas fa-layer-group"></i>
+          <span id="adjMinesInfo">0</span>
+          <small>mines adjacentes</small>
+        </div>
+        <div class="analysis-item">
+          <i class="fas fa-chart-line"></i>
+          <span id="riskLevel">Faible</span>
+          <small>niveau de risque</small>
+        </div>
+        <div class="analysis-item">
+          <i class="fas fa-trophy"></i>
+          <span id="rankInfo">#1</span>
+          <small>classement</small>
+        </div>
+      </div>
+
+      <div class="top-candidates" id="topCandidates">
+        <i class="fas fa-list"></i>
+        <span>Meilleures alternatives : </span>
+        <span id="candidatesList">-</span>
+      </div>
+    </div>
+
+    <!-- Message d'état -->
+    <div class="status-message" id="statusMessage">
+      <i class="fas fa-info-circle"></i>
+      <span>Cliquez sur "IA Prédire" pour obtenir la case la plus sûre, puis sélectionnez-la</span>
+    </div>
+
+    <!-- Historique des sélections -->
+    <div class="history">
+      <div class="history-header">
+        <i class="fas fa-history"></i>
+        <span>Historique des sélections</span>
+        <button id="clearHistoryBtn" class="clear-btn"><i class="fas fa-trash-alt"></i></button>
+      </div>
+      <div class="history-list" id="historyList">
+        <div class="history-empty">
+          <i class="fas fa-chart-line"></i>
+          <span>Aucune sélection pour le moment</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
